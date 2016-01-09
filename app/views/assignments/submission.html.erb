@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Submission</h1>
+</div>
+<%= form_tag assignment_submission_create_path(), :html => { :class => "form-horizontal assignment" } do %>
+  <div class="form-group">
+    <%= label_tag 'Result', nil, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= text_area_tag :result, nil, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= submit_tag 'Submit', :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                assignments_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,25 @@
+common: &common
+  adapter: mysql2
+  encoding: utf8
+  collation: utf8_general_ci
+  pool: 5
+user_pass_host: &user_pass_host
+  username: <%= ENV['DATABASE_USERNAME'] || 'root' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'root' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+
+production: &production
+  database: <%= ENV['DATABASE_NAME'] || 'esm_production' %>
+  <<: *common
+  <<: *user_pass_host
+
+development:
+  database: esm_development
+  <<: *common
+  <<: *user_pass_host
+
+
+test:
+  database: esm_test
+  <<: *common
+  <<: *user_pass_host

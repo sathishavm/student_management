@@ -1,0 +1,41 @@
+<%= form_for @assignment, :html => { :class => "form-horizontal assignment" } do |f| %>
+
+  <% if @assignment.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @assignment.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :training_class_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select(:training_class_id, @classes.collect {|p| [ p.name, p.id ]}, {:include_blank => "Select"}, {:class => 'form-control'}) %>
+    </div>
+    <%=f.error_span(:training_class_id) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                assignments_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

@@ -1,0 +1,54 @@
+<%- model_class = Assignment -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => "My Assignments" %></h1>
+</div>
+<h2> Open Assignments </h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:training_class_id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @open_assignments.each do |assignment| %>
+      <tr>
+        <td><%= link_to assignment.id, assignment_path(assignment) %></td>
+        <td><%= assignment.training_class_name %></td>
+        <td><%= assignment.title %></td>
+        <td><%=l assignment.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => "Submit Result"),
+                      assignment_submission_path(assignment), :class => 'btn btn-primary btn-xs' %>
+        </td>
+      </tr>
+    <% end %> 
+  </tbody>
+</table>
+<h2> Closed Assignments </h2>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:training_class_id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+    </tr>
+  </thead>
+  <tbody>   
+    <% @closed_assignments.each do |assignment| %>
+      <tr>
+        <td><%= link_to assignment.id, assignment_path(assignment) %></td>
+        <td><%= assignment.training_class_name %></td>
+        <td><%= assignment.title %></td>
+        <td><%=l assignment.created_at %></td>
+        <td>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
